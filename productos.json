@@ -1,10 +1,74 @@
 [
-    {
-        "id": 1,
-        "nombre": "Producto",
-        "descripcion": "Descripción del producto",
-        "precio": 0,
-        "imagen": "images/producto-de-ejemplo.jpg",
-        "categoría": "Nombre de la categoría"
-    }
+  {
+    "id": 1,
+    "nombre": "Aros Millenia con cristales rosas",
+    "descripcion": "Estos pendientes de cristal con cristales rosas de talla de pera y engaste en tono dorado son el complemento perfecto para cualquier ocasión. Su diseño escultural aporta elegancia y estilo, y combinan perfectamente con otras piezas de la familia Millenia.",
+    "precio": 373600,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F642616%2F5614932.jpg%3Fv%3D638169193036270000",
+    "categoria": "Aros"
+  },
+  {
+    "id": 2,
+    "nombre": "Aro Curiosa Individual",
+    "descripcion": "El diseño tridimensional de estos aros Curiosa con cristales azules de talla princesa cuadrada y engaste geométrico en baño de oro es una obra de arte. Perfectos para quienes aprecian la artesanía de precisión matemática y el diseño contemporáneo.",
+    "precio": 671000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636762%2FName_7300.jpg%3Fv%3D638096551465900000",
+    "categoria": "Aros"
+  },
+  {
+    "id": 3,
+    "nombre": "Aros Constella Talla redonda",
+    "descripcion": "Los aros Constella con piedras centrales de gran impacto y pavé en oro rosa son la definición de elegancia atemporal. Estos pendientes de gota combinan sofisticación y estilo, convirtiéndolos en una pieza clave para cualquier colección de joyas.",
+    "precio": 318000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F623493%2FName_10501.jpg%3Fv%3D638019767990300000",
+    "categoria": "Aros"
+  },
+  {
+    "id": 4,
+    "nombre": "Anillo de cóctel Constella",
+    "descripcion": "Este anillo de cóctel de Swarovski destaca por su piedra central de talla princesa, realzada con pavé en tono oro. Un diseño sencillo pero impactante, perfecto para quienes buscan una joya que combine sofisticación y versatilidad.",
+    "precio": 367000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F620728%2FName_9979.jpg%3Fv%3D638005963192600000",
+    "categoria": "Anillos"
+  },
+  {
+    "id": 5,
+    "nombre": "Anillo Attract Soul Heart Blanco",
+    "descripcion": "Este anillo con baño de rodio presenta dos piedras en forma de corazón, que se encuentran en el centro. Un diseño elegante y romántico, ideal para quienes buscan una joya sofisticada y llena de significado.",
+    "precio": 318000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636137%2FName_3425.jpg%3Fv%3D638096549854930000",
+    "categoria": "Anillos"
+  },
+  {
+    "id": 6,
+    "nombre": "Anillo Twist Wrap Blanco",
+    "descripcion": "Este anillo de Swarovski combina piedras blancas en diferentes tallas con un diseño espiral. Con un acabado reluciente y una forma elegante, es una joya que destaca por su opulencia y belleza atemporal.",
+    "precio": 692000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636572%2FName_6247.jpg%3Fv%3D638096550177000000",
+    "categoria": "Anillos"
+  },
+  {
+    "id": 7,
+    "nombre": "Colgante Stilla",
+    "descripcion": "Este colgante con forma de corazón, adornado con cristales transparentes y baño de oro, es perfecto para quienes buscan una joya delicada y llena de romanticismo. Un accesorio imprescindible para coleccionistas de piezas únicas.",
+    "precio": 277000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F639717%2F5648750.jpg%3Fv%3D638156125445100000",
+    "categoria": "Collares"
+  },
+  {
+    "id": 8,
+    "nombre": "Collar Millenia - Zirconia",
+    "descripcion": "El collar Millenia, con cristales de talla pera y engaste de garra, es una pieza atemporal que se puede combinar con otros accesorios de la misma colección. Ideal para noches glamorosas, aporta sofisticación y estilo en cada ocasión.",
+    "precio": 1202000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636804%2FName_8670.jpg%3Fv%3D638096551492600000",
+    "categoria": "Collares"
+  },
+  {
+    "id": 9,
+    "nombre": "Colgante y broche Florere",
+    "descripcion": "La pieza Florere, que funciona como colgante y broche, está inspirada en la naturaleza y presenta pétalos de flor adornados con cristales. Un diseño brillante y único que aporta elegancia y versatilidad a cualquier joyero.",
+    "precio": 1138000,
+    "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F639732%2F5652068.jpg%3Fv%3D638156125515500000",
+    "categoria": "Collares"
+  }
 ]

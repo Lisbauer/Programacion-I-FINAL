@@ -1,6 +1,6 @@
-Alumnos/as: 
-Cuatrimestre: 
-Comisión: 
-Turno: 
-Materia: 
-Profesor: 
+Alumnos/as: Bauer Lisa
+Cuatrimestre: 2do Cuatrimestre
+Comisión: 2AV
+Turno: Noche
+Materia: Programación I
+Profesor: Carlassara Fabrizio 
