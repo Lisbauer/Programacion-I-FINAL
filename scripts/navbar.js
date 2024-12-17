@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     logoLink.classList.add('logo-container')
   
     const logoImg = document.createElement('img');
-    logoImg.src = './imagenes/logo.png';
+    logoImg.src = './images/logo.png';
     logoImg.alt = 'Logo';
     logoImg.classList.add('img-fluid');
   
