@@ -1,3 +1,5 @@
+import { detectarTeclaCerrar } from './detectorTeclado.js';
+
 export function crearModalVerMas(producto) {
     // creo el modal
     const modal = document.createElement('div');
@@ -91,8 +93,16 @@ export function crearModalVerMas(producto) {
     const bootstrapModal = new bootstrap.Modal(modal);
     bootstrapModal.show();
 
-    // desaparece el modal
+    const detectarTecla = (event) => detectarTeclaCerrar(event, () => bootstrapModal.hide());
+
+    //  event listener para la tecla Enter
+    document.addEventListener("keydown", detectarTecla);
+
+    // Cuando el modal se cierre, se elimina el listener
     modal.addEventListener('hidden.bs.modal', () => {
         modal.remove();
+        document.removeEventListener("keydown", detectarTecla); // Remover el listener
     });
 }
+
+

@@ -95,8 +95,9 @@ main {
     bottom: 110px;
 }
 .btn{
-    font-size: 1.2rem;
-    padding: 6px 33px 6px 33px;
+    font-size: 1.1rem;
+    padding: 6px 15px 6px 15px;
+    margin: 5px;
 }
 .btn-primary{
     background: rgb(1, 62, 92);
@@ -106,6 +107,7 @@ main {
     background: rgb(0, 26, 39);
     border: none;
 }
+
 .btn-primary:active{
     --bs-btn-active-bg: rgb(81, 146, 178);
 }
@@ -146,48 +148,37 @@ main {
     cursor: pointer;
 }
 #contador-carrito {
-    background-color: #bb7ef9;  /* Color de fondo (puedes cambiarlo a rojo o dorado) */
-    color: white;  /* Color del texto */
+    background-color: #bb7ef9;  
+    color: white;  
     font-weight: bold;  
-    padding: 15px 15px;  /* Espaciado interno para que el número no toque los bordes */
-    border-radius: 50%;  /* Redondear los bordes para hacerlo un círculo */
+    padding: 15px 15px;  
+    border-radius: 50%;  
     position: absolute;
     top: -5px;
     right: -5px;
-    font-size: 16px;  /* Tamaño de la fuente (puedes ajustarlo si es necesario) */
-    width: 20px;  /* Ancho fijo para asegurar un círculo perfecto */
-    height: 20px;  /* Alto fijo para asegurar un círculo perfecto */
-    display: flex;  /* Usamos flexbox para centrar el número */
-    align-items: center;  /* Centrar verticalmente */
+    font-size: 16px; 
+    width: 20px; 
+    height: 20px; 
+    display: flex;  
+    align-items: center; 
     justify-content: center;  
 }
 
-
-
-form textarea {
-    margin: 0.5em 0;
-    border-radius: 0.5em;
-    border: 1px solid #134f5c;
-    padding: 0 0.5em;
-    background: #d0e0e3;
-    font-size: 1.6em;
-    line-height: 1.5;
-    font-weight: 400;
-    text-align: left;
-    color: #134f5c;
+/* MODAL DEL CARRITO */
+.modal-content{
+    width: 400px;
+    border-radius: 8px;
+    padding: 30px;
 }
 
+
+
 form select {
-    margin: 0.5em 0;
-    border-radius: 0.5em;
-    border: 1px solid #134f5c;
-    padding: 0 0.5em;
-    background: #d0e0e3;
-    font-size: 1.6em;
-    line-height: 1.5;
+    border-radius: 0.2em;
+    padding: 0 3.4em 0 0.4em;
+    font-size: 1.4em;
     font-weight: 400;
     text-align: left;
-    color: #134f5c;
 }
 
 hr {

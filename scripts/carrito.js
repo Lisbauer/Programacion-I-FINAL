@@ -1,8 +1,11 @@
 import { finalizarCompraModal } from "./finalizarCompra.js";
+import { detectarTeclaCerrar } from './detectorTeclado.js';
 
 export class Carrito {
   constructor() {
-    this.productosEnCarrito = [];
+    // Cargar los productos del carrito desde el localStorage (si existen)
+    this.productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    this.actualizarContadorCarrito(); // Actualizar el contador cuando se cargue el carrito
   }
 
   agregarProducto(producto) {
@@ -18,25 +21,45 @@ export class Carrito {
     }
     this.actualizarModalCarrito(); // actualizo el carrito
     this.actualizarContadorCarrito(); // actualizo el contador del carrito
+    this.guardarEnLocalStorage(); // Guardar los productos en el localStorage
   }
 
-  // mostrar el carrito en el modal
   abrirModalCarrito() {
     const modalCarrito = document.getElementById("modal-carrito");
     modalCarrito.style.display = "block"; // mostrar el modal
 
-    this.actualizarModalCarrito(); // Actualizar el contenido del modal con los productos del carrito
+    this.actualizarModalCarrito(); // actualizo el contenido del modal con los productos del carrito
+
+    const cerrarModal = () => {
+        modalCarrito.style.display = "none"; // Aquí cierras el modal
+    };
+
+    const detectarTecla = (event) => detectarTeclaCerrar(event, cerrarModal);
+
+    document.addEventListener("keydown", detectarTecla);
+
+    modalCarrito.addEventListener('hidden.bs.modal', () => {
+        modalCarrito.remove();
+        document.removeEventListener("keydown", detectarTecla); // Remover el listener
+    });
   }
 
-  // actualizo el modal pero con los productos del carrito optimizados a otro tama;o
   actualizarModalCarrito() {
     const modalContenido = document.getElementById("modal-carrito-contenido");
     modalContenido.innerHTML = ""; // limpio el contenido del modal
-
+  
     if (this.productosEnCarrito.length === 0) {
       const mensajeVacio = document.createElement("p");
       mensajeVacio.textContent = "El carrito está vacío.";
       modalContenido.appendChild(mensajeVacio);
+  
+      // boton de cierre 
+      const botonCerrar = document.createElement("button");
+      botonCerrar.textContent = "Cerrar";
+      botonCerrar.classList.add("btn", "btn-danger", "btn-sm", "close-button");
+      botonCerrar.addEventListener("click", () => this.cerrarModalCarrito());
+      modalContenido.appendChild(botonCerrar);
+  
       return;
     }
 
@@ -110,25 +133,43 @@ export class Carrito {
     totalDiv.textContent = `Total: $${totalCarrito.toLocaleString()}`;
     modalContenido.appendChild(totalDiv);
 
-    // Agregar botones de accion, POSIBLEMENTE BORRAR A FUTURO
+    // Agregar botones de acción
     const accionesDiv = document.createElement("div");
-    accionesDiv.classList.add("d-flex", "justify-content-between", "mt-3");
-
-    const botonCancelar = document.createElement("button");
-    botonCancelar.classList.add("btn", "btn-secondary");
-    botonCancelar.textContent = "Cancelar";
-    botonCancelar.addEventListener("click", () => this.cerrarModalCarrito());
-    accionesDiv.appendChild(botonCancelar);
+    accionesDiv.classList.add("d-flex", "justify-content-evenly", "mt-3");
 
     const btnFinalizar = document.createElement("button");
     btnFinalizar.classList.add("btn", "btn-primary");
     btnFinalizar.textContent = "Finalizar Compra";
-    btnFinalizar.addEventListener("click", () =>
-      finalizarCompraModal.abrirModal()
-    );
+    btnFinalizar.addEventListener("click", () => {
+      this.vaciarCarrito(); // Vaciar el carrito al finalizar la compra
+      finalizarCompraModal.abrirModal();
+    });
     accionesDiv.appendChild(btnFinalizar);
 
+    const botonCerrar = document.createElement("button");
+    botonCerrar.classList.add("btn", "btn-secondary");
+    botonCerrar.textContent = "Cerrar";
+    botonCerrar.addEventListener("click", () => this.cerrarModalCarrito());
+    accionesDiv.appendChild(botonCerrar);
+
+    const botonLimpiarCarrito = document.createElement("button");
+    botonLimpiarCarrito.classList.add("btn", "btn-danger");
+    botonLimpiarCarrito.textContent = "Limpiar Carrito";
+    botonLimpiarCarrito.addEventListener("click", () => this.limpiarCarrito());
+    accionesDiv.appendChild(botonLimpiarCarrito);
+
     modalContenido.appendChild(accionesDiv);
+  }
+
+  vaciarCarrito() {
+    this.productosEnCarrito = []; // Limpiar el array de productos
+    this.actualizarModalCarrito(); // Actualizar el modal
+    this.actualizarContadorCarrito(); // Actualizar el contador del carrito
+    this.guardarEnLocalStorage(); // Guardar la versión vacía en localStorage
+  }
+
+  limpiarCarrito() {
+    this.vaciarCarrito(); // Vaciar el carrito
   }
 
   cerrarModalCarrito() {
@@ -136,7 +177,6 @@ export class Carrito {
     modalCarrito.style.display = "none";
   }
 
-  // Modal para finalizar la compra, NO FUNCIONA AUN
   abrirModalDetalle() {
     const modalDetalle = document.getElementById("modal-detalle");
     const modalDetalleContenido = document.getElementById(
@@ -151,7 +191,7 @@ export class Carrito {
   cambiarCantidadProducto(idProducto, accion) {
     const producto = this.productosEnCarrito.find((p) => p.id === idProducto);
     if (producto) {
-      // Verifico q la cantidad no se vuelva negativa
+      // Verifico que la cantidad no se vuelva negativa
       if (accion === "sumar") {
         producto.cantidad += 1;
       } else if (accion === "restar") {
@@ -165,9 +205,10 @@ export class Carrito {
         }
       }
 
-      // se actualiza el contenido del modal con la nueva cantidad
+      // Se actualiza el contenido del modal con la nueva cantidad
       this.actualizarModalCarrito();
       this.actualizarContadorCarrito(); // y se actualiza el contador del carrito
+      this.guardarEnLocalStorage(); // Guardar cambios en localStorage
     }
   }
 
@@ -178,8 +219,17 @@ export class Carrito {
         (total, producto) => total + producto.cantidad,
         0
       );
-      contador.textContent = totalProductos > 0 ? totalProductos : ""; // muestra el número solo si es mayor a 0
+      // Si no hay productos, muestra 0 en lugar de desaparecer el contador
+      contador.textContent = totalProductos > 0 ? totalProductos : "0"; 
+
+      // Guardar el contador en el localStorage
+      localStorage.setItem("contadorCarrito", totalProductos);
     }
+  }
+
+  guardarEnLocalStorage() {
+    // Guardar los productos y el contador en el localStorage
+    localStorage.setItem("productosEnCarrito", JSON.stringify(this.productosEnCarrito));
   }
 }
 

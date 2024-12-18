@@ -67,7 +67,6 @@ export function renderizarProductos(productos) {
             actualizarContador(); 
         });
         
-
         
         const verMasButton = document.createElement("button");
         verMasButton.classList.add("btn", "btn-secondary");
@@ -77,9 +76,6 @@ export function renderizarProductos(productos) {
 
         verMasButton.addEventListener("click", (event) => {
             event.preventDefault();  
-            console.log(`Producto comprado: ${producto.nombre}`);
-            carrito.agregarProducto(producto);  
-
             crearModalVerMas(producto);
         });
 
