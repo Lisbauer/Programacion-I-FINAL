@@ -1,6 +1,8 @@
-Alumnos/as: Bauer Lisa
+Alumna: Bauer, Lisa
 Cuatrimestre: 2do Cuatrimestre
 Comisión: 2AV
 Turno: Noche
+Año: 2024
 Materia: Programación I
-Profesor: Carlassara Fabrizio 
+Profesor: Carlassara, Fabrizio 
+

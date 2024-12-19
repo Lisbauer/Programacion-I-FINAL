@@ -1,11 +1,12 @@
 import { finalizarCompraModal } from "./finalizarCompra.js";
-import { detectarTeclaCerrar } from './detectorTeclado.js';
+import { detectarTeclaCerrar } from "./detectorTeclado.js";
 
 export class Carrito {
   constructor() {
-    // Cargar los productos del carrito desde el localStorage (si existen)
-    this.productosEnCarrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
-    this.actualizarContadorCarrito(); // Actualizar el contador cuando se cargue el carrito
+    // cargo los productos del carrito desde el localStorage (si es q existen)
+    this.productosEnCarrito =
+      JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
+    this.actualizarContadorCarrito(); // actualiza el contador cuando se cargue el carrito
   }
 
   agregarProducto(producto) {
@@ -31,35 +32,36 @@ export class Carrito {
     this.actualizarModalCarrito(); // actualizo el contenido del modal con los productos del carrito
 
     const cerrarModal = () => {
-        modalCarrito.style.display = "none"; // Aquí cierras el modal
+      modalCarrito.style.display = "none"; // se cierra el modal
     };
 
-    const detectarTecla = (event) => detectarTeclaCerrar(event, cerrarModal);
+    //funcion global para detectar teclas
+    document.addEventListener("keydown", (event) =>
+      detectarTeclaCerrar(event, cerrarModal)
+    );
 
-    document.addEventListener("keydown", detectarTecla);
-
-    modalCarrito.addEventListener('hidden.bs.modal', () => {
-        modalCarrito.remove();
-        document.removeEventListener("keydown", detectarTecla); // Remover el listener
+    modalCarrito.addEventListener("hidden.bs.modal", () => {
+      modalCarrito.remove();
+      document.removeEventListener("keydown", detectarTeclaCerrar); // remover el listener
     });
   }
 
   actualizarModalCarrito() {
     const modalContenido = document.getElementById("modal-carrito-contenido");
     modalContenido.innerHTML = ""; // limpio el contenido del modal
-  
+
     if (this.productosEnCarrito.length === 0) {
       const mensajeVacio = document.createElement("p");
       mensajeVacio.textContent = "El carrito está vacío.";
       modalContenido.appendChild(mensajeVacio);
-  
-      // boton de cierre 
+
+      // boton de cierre
       const botonCerrar = document.createElement("button");
       botonCerrar.textContent = "Cerrar";
       botonCerrar.classList.add("btn", "btn-danger", "btn-sm", "close-button");
       botonCerrar.addEventListener("click", () => this.cerrarModalCarrito());
       modalContenido.appendChild(botonCerrar);
-  
+
       return;
     }
 
@@ -105,14 +107,6 @@ export class Carrito {
       productoDiv.appendChild(infoDiv);
 
       // Botones para sumar/restar
-      const botonRestar = document.createElement("button");
-      botonRestar.classList.add("btn", "btn-sm", "btn-outline-danger", "ms-2");
-      botonRestar.textContent = "-";
-      botonRestar.addEventListener("click", () =>
-        this.cambiarCantidadProducto(producto.id, "restar")
-      );
-      productoDiv.appendChild(botonRestar);
-
       const botonSumar = document.createElement("button");
       botonSumar.classList.add("btn", "btn-sm", "btn-outline-success", "ms-2");
       botonSumar.textContent = "+";
@@ -120,6 +114,14 @@ export class Carrito {
         this.cambiarCantidadProducto(producto.id, "sumar")
       );
       productoDiv.appendChild(botonSumar);
+
+      const botonRestar = document.createElement("button");
+      botonRestar.classList.add("btn", "btn-sm", "btn-outline-danger", "ms-2");
+      botonRestar.textContent = "-";
+      botonRestar.addEventListener("click", () =>
+        this.cambiarCantidadProducto(producto.id, "restar")
+      );
+      productoDiv.appendChild(botonRestar);
 
       modalContenido.appendChild(productoDiv);
 
@@ -137,6 +139,18 @@ export class Carrito {
     const accionesDiv = document.createElement("div");
     accionesDiv.classList.add("d-flex", "justify-content-evenly", "mt-3");
 
+    const botonLimpiarCarrito = document.createElement("button");
+    botonLimpiarCarrito.classList.add("btn", "btn-danger");
+    botonLimpiarCarrito.textContent = "Limpiar Carrito";
+    botonLimpiarCarrito.addEventListener("click", () => this.limpiarCarrito());
+    accionesDiv.appendChild(botonLimpiarCarrito);
+
+    const botonCerrar = document.createElement("button");
+    botonCerrar.classList.add("btn", "btn-secondary");
+    botonCerrar.textContent = "Cerrar";
+    botonCerrar.addEventListener("click", () => this.cerrarModalCarrito());
+    accionesDiv.appendChild(botonCerrar);
+
     const btnFinalizar = document.createElement("button");
     btnFinalizar.classList.add("btn", "btn-primary");
     btnFinalizar.textContent = "Finalizar Compra";
@@ -146,30 +160,18 @@ export class Carrito {
     });
     accionesDiv.appendChild(btnFinalizar);
 
-    const botonCerrar = document.createElement("button");
-    botonCerrar.classList.add("btn", "btn-secondary");
-    botonCerrar.textContent = "Cerrar";
-    botonCerrar.addEventListener("click", () => this.cerrarModalCarrito());
-    accionesDiv.appendChild(botonCerrar);
-
-    const botonLimpiarCarrito = document.createElement("button");
-    botonLimpiarCarrito.classList.add("btn", "btn-danger");
-    botonLimpiarCarrito.textContent = "Limpiar Carrito";
-    botonLimpiarCarrito.addEventListener("click", () => this.limpiarCarrito());
-    accionesDiv.appendChild(botonLimpiarCarrito);
-
     modalContenido.appendChild(accionesDiv);
   }
 
   vaciarCarrito() {
-    this.productosEnCarrito = []; // Limpiar el array de productos
-    this.actualizarModalCarrito(); // Actualizar el modal
-    this.actualizarContadorCarrito(); // Actualizar el contador del carrito
-    this.guardarEnLocalStorage(); // Guardar la versión vacía en localStorage
+    this.productosEnCarrito = []; // limpiar el array de productos
+    this.actualizarModalCarrito(); // actualiza el modal
+    this.actualizarContadorCarrito(); // actualiza el contador del carrito
+    this.guardarEnLocalStorage(); // guarda la version vacia en localStorage
   }
 
   limpiarCarrito() {
-    this.vaciarCarrito(); // Vaciar el carrito
+    this.vaciarCarrito(); // vaciar el carrito
   }
 
   cerrarModalCarrito() {
@@ -191,7 +193,7 @@ export class Carrito {
   cambiarCantidadProducto(idProducto, accion) {
     const producto = this.productosEnCarrito.find((p) => p.id === idProducto);
     if (producto) {
-      // Verifico que la cantidad no se vuelva negativa
+      // vverifico que la cantidad no se vuelva negativa
       if (accion === "sumar") {
         producto.cantidad += 1;
       } else if (accion === "restar") {
@@ -205,10 +207,10 @@ export class Carrito {
         }
       }
 
-      // Se actualiza el contenido del modal con la nueva cantidad
+      // se actualiza el contenido del modal con la nueva cantidad
       this.actualizarModalCarrito();
       this.actualizarContadorCarrito(); // y se actualiza el contador del carrito
-      this.guardarEnLocalStorage(); // Guardar cambios en localStorage
+      this.guardarEnLocalStorage(); // guarda cambios en localStorage
     }
   }
 
@@ -220,7 +222,7 @@ export class Carrito {
         0
       );
       // Si no hay productos, muestra 0 en lugar de desaparecer el contador
-      contador.textContent = totalProductos > 0 ? totalProductos : "0"; 
+      contador.textContent = totalProductos > 0 ? totalProductos : "0";
 
       // Guardar el contador en el localStorage
       localStorage.setItem("contadorCarrito", totalProductos);
@@ -228,8 +230,11 @@ export class Carrito {
   }
 
   guardarEnLocalStorage() {
-    // Guardar los productos y el contador en el localStorage
-    localStorage.setItem("productosEnCarrito", JSON.stringify(this.productosEnCarrito));
+    //  productos y el contador en el localStorage
+    localStorage.setItem(
+      "productosEnCarrito",
+      JSON.stringify(this.productosEnCarrito)
+    );
   }
 }
 

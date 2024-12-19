@@ -39,12 +39,12 @@ export class FinalizarCompraModal {
             { label: 'Email', id: 'email', type: 'email', required: true },
             { label: 'Número de Teléfono', id: 'telefono', type: 'number', required: true },
             { label: 'Dirección', id: 'direccion', type: 'text', required: true },            
-            { label: 'Fecha de Entrega', id: 'fecha-entrega', type: 'date', required: true }, 
-            { label: 'Tipo de Tarjeta', id: 'tipo-tarjeta', type: 'select', options: ['VISA', 'MASTERCARD'], required: true },
+            { label: 'Fecha de Entrega', id: 'fecha-entrega', type: 'date', required: true },
+            { label: 'Tipo de Tarjeta', id: 'tipo-tarjeta', type: 'select', options: ['Selecciona la tarjeta', 'VISA', 'MASTERCARD'], required: true },
+            { label: 'Cuotas', id: 'cuotas', type: 'select', options: ['Selecciona las cuotas', '1 cuota sin interes', '3 cuotas', '6 cuotas', '12 cuotas'], required: true, disabled: true },
             { label: 'Número de Tarjeta', id: 'numero-tarjeta', type: 'number', required: true },
             { label: 'Código de Seguridad', id: 'codigo-seguridad', type: 'number', required: true },
         ];
-        
 
         campos.forEach(campo => {
             const divCampo = document.createElement('div');
@@ -61,6 +61,7 @@ export class FinalizarCompraModal {
                 input.id = campo.id;
                 input.name = campo.id;
                 input.required = campo.required;
+                if (campo.disabled) input.disabled = true; // Deshabilitar el select de cuotas inicialmente
                 campo.options.forEach(optionValue => {
                     const option = document.createElement('option');
                     option.value = optionValue;
@@ -80,6 +81,24 @@ export class FinalizarCompraModal {
             divCampo.appendChild(input);
             formulario.appendChild(divCampo);
         });
+
+        // Agregar el campo de Monto a Pagar
+        const divMonto = document.createElement('div');
+        divMonto.classList.add('mb-3');
+
+        const labelMonto = document.createElement('label');
+        labelMonto.textContent = 'Monto a pagar';
+        labelMonto.classList.add('form-label');
+        divMonto.appendChild(labelMonto);
+
+        const montoPagarInput = document.createElement('input');
+        montoPagarInput.id = 'monto-pagar';
+        montoPagarInput.type = 'text';
+        montoPagarInput.readOnly = true; // No editable por el usuario
+        montoPagarInput.classList.add('form-control');
+        divMonto.appendChild(montoPagarInput);
+
+        formulario.appendChild(divMonto);
 
         // Botones de acción
         const accionesDiv = document.createElement('div');
@@ -109,10 +128,48 @@ export class FinalizarCompraModal {
             event.preventDefault();
             this.procesarCompra();
         });
+
+        // Evento para habilitar el select de cuotas solo si se selecciona una tarjeta
+        const tipoTarjetaSelect = document.getElementById('tipo-tarjeta');
+        const cuotasSelect = document.getElementById('cuotas');
+        tipoTarjetaSelect.addEventListener('change', () => {
+            if (tipoTarjetaSelect.value !== 'Selecciona la tarjeta') {
+                cuotasSelect.disabled = false;
+            } else {
+                cuotasSelect.disabled = true;
+            }
+        });
+
+        // Evento para calcular el monto a pagar según las cuotas
+        cuotasSelect.addEventListener('change', () => {
+            this.calcularMontoPagar();
+        });
+    }
+ 
+    calcularMontoPagar() {
+        // no funciona!!! borrar a futuroooo
+        const montoBase = 1000; // sin sentido, no puedo pasar la variable temporal donde almaceno el monto total del carrito...
+        const cuotas = document.getElementById('cuotas').value;
+
+
+        // borrar .......
+        let porcentajeExtra = 0;
+        if (cuotas === '3 cuotas') {
+            porcentajeExtra = 0.05; // 5%
+        } else if (cuotas === '6 cuotas') {
+            porcentajeExtra = 0.10; // 10%
+        } else if (cuotas === '12 cuotas') {
+            porcentajeExtra = 0.25; // 25%
+        }
+
+        // Calcular el monto total  / borrar tmbn
+        const montoFinal = montoBase + (montoBase * porcentajeExtra);
+        const montoPagarInput = document.getElementById('monto-pagar');
+        montoPagarInput.value = `$${montoFinal.toFixed(2)}`; // Mostrar el monto con 2 decimales
     }
 
     crearModalAgradecimiento() {
-        // Crear el modal de agradecimiento
+        // modal de agradecimiento
         const modalAgradecimiento = document.createElement('div');
         modalAgradecimiento.id = 'modal-agradecimiento';
         modalAgradecimiento.classList.add('modal', 'fade');
@@ -133,7 +190,7 @@ export class FinalizarCompraModal {
         modalContent.appendChild(titulo);
 
         const mensaje = document.createElement('p');
-        mensaje.textContent = 'Tu compra ha sido procesada exitosamente. ¡Te esperamos pronto!';
+        mensaje.textContent = 'Tu compra ha sido procesada exitosamente. Revisa tu mail para más detalles.';
         modalContent.appendChild(mensaje);
 
         const btnCerrar = document.createElement('button');
@@ -150,17 +207,17 @@ export class FinalizarCompraModal {
     }
 
     abrirModal() {
-        // Cerrar el modal del carrito si está abierto
-        const modalCarrito = document.getElementById('modal-carrito');  // Asumiendo que el modal del carrito tiene este id
+        // Cierroel modal del carrito si esta abierto
+        const modalCarrito = document.getElementById('modal-carrito');
         if (modalCarrito) {
-            modalCarrito.style.display = 'none';  // Cerrar el modal del carrito
+            modalCarrito.style.display = 'none'; 
         }
 
-        // Abrir el modal de finalizar compra
+        // abro el modal de finalizar compra
         const modalDetalle = document.getElementById('modal-detalle');
         if (modalDetalle) {
             const bootstrapModal = new bootstrap.Modal(modalDetalle);
-            bootstrapModal.show();  // Usamos Bootstrap para manejar la apertura del modal
+            bootstrapModal.show();  //  bootstrap para manejar la apertura del modal
         }
     }
 
@@ -168,7 +225,7 @@ export class FinalizarCompraModal {
         const modalDetalle = document.getElementById('modal-detalle');
         if (modalDetalle) {
             const bootstrapModal = bootstrap.Modal.getInstance(modalDetalle);
-            bootstrapModal.hide();  // Usamos Bootstrap para manejar el cierre del modal
+            bootstrapModal.hide();
         }
     }
 
@@ -176,7 +233,7 @@ export class FinalizarCompraModal {
         const modalAgradecimiento = document.getElementById('modal-agradecimiento');
         if (modalAgradecimiento) {
             const bootstrapModal = bootstrap.Modal.getInstance(modalAgradecimiento);
-            bootstrapModal.hide();  // Usamos Bootstrap para manejar el cierre del modal
+            bootstrapModal.hide();
         }
     }
 
@@ -189,39 +246,35 @@ export class FinalizarCompraModal {
         const tipoTarjeta = document.getElementById('tipo-tarjeta');
         const numeroTarjeta = document.getElementById('numero-tarjeta');
         const codigoSeguridad = document.getElementById('codigo-seguridad');
+        const cuotas = document.getElementById('cuotas');
     
-        const campos = [nombre, email, telefono, direccion, fecha, tipoTarjeta, numeroTarjeta, codigoSeguridad];
+        const campos = [nombre, email, telefono, direccion, fecha, tipoTarjeta, numeroTarjeta, codigoSeguridad, cuotas];
         let validado = true;
     
         campos.forEach(campo => {
-            if (!campo.value) {
-                campo.classList.add('form-control');
-                console.log(`Campo vacío: ${campo.id}`);
+            // Si el campo está vacío, agregar el borde rojo
+            if (!campo.value || (campo.type === 'select' && campo.selectedIndex === 0)) {
+                campo.classList.add('is-invalid'); // Agregar clase 'is-invalid' para el borde rojo
                 validado = false;
             } else {
-                campo.classList.remove('form-control');
+                campo.classList.remove('is-invalid'); // Remover borde rojo si el campo está completo
             }
         });
     
         if (validado) {
             this.cerrarModal();
             this.abrirModalAgradecimiento();
-        } else {
-            alert('Por favor, completa todos los campos.');
         }
     }
-    
-    
     
 
     abrirModalAgradecimiento() {
         const modalAgradecimiento = document.getElementById('modal-agradecimiento');
         if (modalAgradecimiento) {
             const bootstrapModal = new bootstrap.Modal(modalAgradecimiento);
-            bootstrapModal.show();  // Bootstrap para mostrar el modal de agradecimiento
+            bootstrapModal.show();
         }
     }
 }
 
-//  instancia para poder usarla en otras partes
 export const finalizarCompraModal = new FinalizarCompraModal();

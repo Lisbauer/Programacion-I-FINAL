@@ -1,5 +1,5 @@
 import { cargarProductos } from './cardProductos.js';
-import { crearDropdownCategoria, crearDropdownPrecio, setProductos, filtrarProductos } from "./filtraciones.js";
+import { crearDropdownCategoria, crearDropdownPrecio } from "./filtros.js";
 import { carrito } from './carrito.js'; 
 
 // esta es mi función principal que ejecuta mi sitio web

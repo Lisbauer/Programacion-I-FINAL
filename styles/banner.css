@@ -1,0 +1,77 @@
+/* Banner contenedor con animación de entrada */
+.banner-flotante {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out; /* Animación de entrada */
+}
+
+/* Imagen del banner */
+.banner-flotante img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out; /* Efecto de zoom suave */
+}
+
+.banner-flotante img:hover {
+    transform: scale(1.05); 
+}
+
+.btn-verMas {
+    position: absolute;
+    top: 65%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: white;
+    padding: 6px 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    border: solid 1px white;
+    font-family: "Noto Sans", serif;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-close-banner {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 70px;
+    color: rgba(255, 255, 255, 0.644);
+    cursor: pointer;
+    z-index: 10000;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-close-banner:hover {
+    color: rgba(219, 148, 245, 0.8);
+    transform: rotate(90deg); 
+}
+
+/* animacion para aparecer */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

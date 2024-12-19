@@ -1,82 +1,91 @@
-import { setProductos, filtrarProductos } from "./filtraciones.js";
+import { setProductos } from "./filtros.js";
 import { carrito } from './carrito.js'; 
 import { crearModalVerMas } from './verMas.js';
 
-// cargo mi json y lo renderizo
-export async function cargarProductos() {
-    try {
-        const response = await fetch('./productos.json');
-        const productos = await response.json();
-        
-        setProductos(productos); 
-        renderizarProductos(productos); 
-    } catch (error) {
-        console.error("Error al cargar los productos:", error);
-    }
-}
 
-// renderiza los productos
-export function renderizarProductos(productos) {
-    const contenedor = document.getElementById("productos");
-    if (!contenedor) {
-        console.error('Contenedor de productos no encontrado'); // para borrar luego, depuramos 
-        return;
+class Producto {
+    constructor(id, nombre, descripcion, precio, imagen, imagen2, peso, material, dimensiones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagen = imagen;
+        this.imagen2 = imagen2;
+        this.peso = peso;              
+        this.material = material;       
+        this.dimensiones = dimensiones;
     }
 
-    // limpio el contenedor antes de agregar nuevos productos
-    contenedor.innerHTML = '';
 
-    productos.forEach(producto => {
+    renderizar() {
         const card = document.createElement("div");
         card.classList.add("card", "mb-4", "col-md-4");
 
         const img = document.createElement("img");
-        img.src = producto.imagen;
+        img.src = this.imagen;
         img.classList.add("card-img-top");
-        img.alt = producto.nombre;
+        img.alt = this.nombre;
+
+        img.addEventListener("mouseover", () => {
+            img.src = this.imagen2 || this.imagen;
+        });
+
+        img.addEventListener("mouseout", () => {
+            img.src = this.imagen;
+        });
 
         const cardBody = document.createElement("div");
         cardBody.classList.add("card-body");
 
         const title = document.createElement("h3");
         title.classList.add("card-title");
-        title.textContent = producto.nombre;
+        title.textContent = this.nombre;
 
         const description = document.createElement("p");
         description.classList.add("card-text");
-        description.textContent = producto.descripcion;
+        description.textContent = this.descripcion;
 
         const price = document.createElement("span");
         price.classList.add("card-precio");
         const precioTexto = document.createElement("strong");
-        precioTexto.textContent = `Precio: $${producto.precio.toLocaleString()}`;
-        price.appendChild(precioTexto); 
+        precioTexto.textContent = `Precio: $${this.precio.toLocaleString()}`;
+        price.appendChild(precioTexto);
+
+        // Agregamos el peso, material y dimensiones
+        const peso = document.createElement("p");
+        peso.classList.add("card-text");
+        peso.textContent = `Peso: ${this.peso || 'No disponible'}`;
+
+        const material = document.createElement("p");
+        material.classList.add("card-text");
+        material.textContent = `Material: ${this.material || 'No disponible'}`;
+
+        const dimensiones = document.createElement("p");
+        dimensiones.classList.add("card-text");
+        dimensiones.textContent = `Dimensiones: ${this.dimensiones || 'No disponible'}`;
 
         const buttonContainer = document.createElement("div");
         buttonContainer.classList.add("btnContainer");
 
-       
         const comprarButton = document.createElement("button");
         comprarButton.classList.add("btn", "btn-primary");
         comprarButton.textContent = "Comprar";
-        comprarButton.dataset.id = producto.id;
+        comprarButton.dataset.id = this.id;
 
         comprarButton.addEventListener("click", (event) => {
-            event.preventDefault();  
-            carrito.agregarProducto(producto);
-            actualizarContador(); 
+            event.preventDefault();
+            carrito.agregarProducto(this);
         });
-        
-        
+
         const verMasButton = document.createElement("button");
         verMasButton.classList.add("btn", "btn-secondary");
         verMasButton.textContent = "Ver más";
-        verMasButton.dataset.id = producto.id;
+        verMasButton.dataset.id = this.id;
         verMasButton.setAttribute("data-bs-target", "#modalProducto");
 
         verMasButton.addEventListener("click", (event) => {
-            event.preventDefault();  
-            crearModalVerMas(producto);
+            event.preventDefault();
+            crearModalVerMas(this);
         });
 
         buttonContainer.appendChild(comprarButton);
@@ -85,10 +94,50 @@ export function renderizarProductos(productos) {
         cardBody.appendChild(img);
         cardBody.appendChild(title);
         cardBody.appendChild(description);
+
         card.appendChild(price);
         card.appendChild(buttonContainer);
         card.appendChild(cardBody);
 
-        contenedor.appendChild(card);
-    });
+        return card;
+    }
 }
+
+export async function cargarProductos() {
+    try {
+        const response = await fetch('./productos.json');
+        const productos = await response.json();
+        
+        setProductos(productos);  
+        renderizarProductos(productos); 
+    } catch (error) {
+        console.error("Error al cargar los productos:", error);
+    }
+}
+
+// renderizar los productos en el DOM
+export function renderizarProductos(productos) {
+    const contenedor = document.getElementById("productos");
+    if (!contenedor) {
+        console.error('Contenedor de productos no encontrado');
+        return;
+    }
+
+    contenedor.innerHTML = '';  // Limpiamos el contenedor
+
+    productos.forEach(productoData => {
+        const producto = new Producto(
+            productoData.id,
+            productoData.nombre,
+            productoData.descripcion,
+            productoData.precio,
+            productoData.imagen,
+            productoData["imagen-2"],
+            productoData.peso,        
+            productoData.material,     
+            productoData.dimensiones 
+        );
+
+        contenedor.appendChild(producto.renderizar());
+    });
+}  

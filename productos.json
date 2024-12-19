@@ -5,9 +5,11 @@
     "descripcion": "Estos pendientes de cristal con cristales rosas de talla de pera y engaste en tono dorado son el complemento perfecto para cualquier ocasión. Su diseño escultural aporta elegancia y estilo, y combinan perfectamente con otras piezas de la familia Millenia.",
     "precio": 373600,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F642616%2F5614932.jpg%3Fv%3D638169193036270000",
-    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F642963%2F5614932_ms1.jpg%3Fv%3D638169194758170000",
-    "imagen-3": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F643101%2F5614932_ms2.jpg%3Fv%3D638169195416870000",
-    "categoria": "Aros"
+    "categoria": "Aros",
+    "material": "Cristal, Baño de oro",
+    "peso": "5 g",
+    "dimensiones": "2 cm x 2 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F643101%2F5614932_ms2.jpg%3Fv%3D638169195416870000"
   },
   {
     "id": 2,
@@ -15,7 +17,11 @@
     "descripcion": "El diseño tridimensional de estos aros Curiosa con cristales azules de talla princesa cuadrada y engaste geométrico en baño de oro es una obra de arte. Perfectos para quienes aprecian la artesanía de precisión matemática y el diseño contemporáneo.",
     "precio": 671000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636762%2FName_7300.jpg%3Fv%3D638096551465900000",
-    "categoria": "Aros"
+    "categoria": "Aros",
+    "material": "Cristal, Baño de oro",
+    "peso": "8 g",
+    "dimensiones": "3 cm x 3 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636791%2FName_7300.jpg%3Fv%3D638096551481100000"
   },
   {
     "id": 3,
@@ -23,15 +29,23 @@
     "descripcion": "Los aros Constella con piedras centrales de gran impacto y pavé en oro rosa son la definición de elegancia atemporal. Estos pendientes de gota combinan sofisticación y estilo, convirtiéndolos en una pieza clave para cualquier colección de joyas.",
     "precio": 318000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F623493%2FName_10501.jpg%3Fv%3D638019767990300000",
-    "categoria": "Aros"
+    "categoria": "Aros",
+    "material": "Cristal, Oro rosa",
+    "peso": "7 g",
+    "dimensiones": "2.5 cm x 2.5 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F623515%2FName_10501.jpg%3Fv%3D638019767996830000"
   },
   {
     "id": 4,
     "nombre": "Anillo de cóctel Constella",
-    "descripcion": "Este anillo de cóctel de Swarovski destaca por su piedra central de talla princesa, realzada con pavé en tono oro. Un diseño sencillo pero impactante, perfecto para quienes buscan una joya que combine sofisticación y versatilidad.",
+    "descripcion": "Canaliza la elegancia con este anillo bañado en tono oro Rosa de la familia Constella. Este sofisticado diseño brilla con luz propia como las estrellas con piedras de talla redonda y llamativos adornos en pavé.",
     "precio": 367000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F620728%2FName_9979.jpg%3Fv%3D638005963192600000",
-    "categoria": "Anillos"
+    "categoria": "Anillos",
+    "material": "Cristal, Baño de oro",
+    "peso": "6 g",
+    "dimensiones": "4 cm x 4 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F621601%2FName_10559.jpg%3Fv%3D638005964433530000"
   },
   {
     "id": 5,
@@ -39,7 +53,11 @@
     "descripcion": "Este anillo con baño de rodio presenta dos piedras en forma de corazón, que se encuentran en el centro. Un diseño elegante y romántico, ideal para quienes buscan una joya sofisticada y llena de significado.",
     "precio": 318000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636137%2FName_3425.jpg%3Fv%3D638096549854930000",
-    "categoria": "Anillos"
+    "categoria": "Anillos",
+    "material": "Cristal, Baño de rodio",
+    "peso": "4 g",
+    "dimensiones": "3 cm x 3 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636186%2FName_3981.jpg%3Fv%3D638096549869500000"
   },
   {
     "id": 6,
@@ -47,7 +65,11 @@
     "descripcion": "Este anillo de Swarovski combina piedras blancas en diferentes tallas con un diseño espiral. Con un acabado reluciente y una forma elegante, es una joya que destaca por su opulencia y belleza atemporal.",
     "precio": 692000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636572%2FName_6247.jpg%3Fv%3D638096550177000000",
-    "categoria": "Anillos"
+    "categoria": "Anillos",
+    "material": "Cristal, Baño de oro",
+    "peso": "9 g",
+    "dimensiones": "3.5 cm x 3.5 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636586%2FName_6247.jpg%3Fv%3D638096550185300000"
   },
   {
     "id": 7,
@@ -55,7 +77,11 @@
     "descripcion": "Este colgante con forma de corazón, adornado con cristales transparentes y baño de oro, es perfecto para quienes buscan una joya delicada y llena de romanticismo. Un accesorio imprescindible para coleccionistas de piezas únicas.",
     "precio": 277000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F639717%2F5648750.jpg%3Fv%3D638156125445100000",
-    "categoria": "Collares"
+    "categoria": "Collares",
+    "material": "Cristal, Baño de oro",
+    "peso": "3 g",
+    "dimensiones": "2.5 cm x 2.5 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F641722%2F5648750_ms1.jpg%3Fv%3D638156135470470000"
   },
   {
     "id": 8,
@@ -63,7 +89,11 @@
     "descripcion": "El collar Millenia, con cristales de talla pera y engaste de garra, es una pieza atemporal que se puede combinar con otros accesorios de la misma colección. Ideal para noches glamorosas, aporta sofisticación y estilo en cada ocasión.",
     "precio": 1202000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636804%2FName_8670.jpg%3Fv%3D638096551492600000",
-    "categoria": "Collares"
+    "categoria": "Collares",
+    "material": "Cristal, Baño de oro",
+    "peso": "15 g",
+    "dimensiones": "5 cm x 5 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F636779%2FName_8670.jpg%3Fv%3D638096551476030000"
   },
   {
     "id": 9,
@@ -71,6 +101,10 @@
     "descripcion": "La pieza Florere, que funciona como colgante y broche, está inspirada en la naturaleza y presenta pétalos de flor adornados con cristales. Un diseño brillante y único que aporta elegancia y versatilidad a cualquier joyero.",
     "precio": 1138000,
     "imagen": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F639732%2F5652068.jpg%3Fv%3D638156125515500000",
-    "categoria": "Collares"
+    "categoria": "Collares",
+    "material": "Cristal, Baño de oro",
+    "peso": "12 g",
+    "dimensiones": "4 cm x 4 cm",
+    "imagen-2": "https://newswarovskiargentina.vtexassets.com/unsafe/1280x0/center/middle/https%3A%2F%2Fnewswarovskiargentina.vtexassets.com%2Farquivos%2Fids%2F642207%2F5652068_ms3.jpg%3Fv%3D638156137887000000"
   }
 ]
