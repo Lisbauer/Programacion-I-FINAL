@@ -4,6 +4,7 @@ export class FinalizarCompraModal {
         this.modalAgradecimiento = this.crearModalAgradecimiento(); // Crear el modal de agradecimiento
     }
 
+    // aca creo mi html 
     crearModal() {
         // El modal ya existe? verificamos
         if (document.getElementById('modal-detalle')) return;
@@ -12,8 +13,7 @@ export class FinalizarCompraModal {
         const modalDetalle = document.createElement('div');
         modalDetalle.id = 'modal-detalle';
         modalDetalle.classList.add('modal', 'fade');
-        modalDetalle.setAttribute('tabindex', '-1');
-        modalDetalle.setAttribute('aria-labelledby', 'modal-detalle-label');
+        modalDetalle.setAttribute('aria-labelledby', 'modal-detalle-label'); // PROPIEDADES DE ACCESBILIDAD para personas con discapacidades
         modalDetalle.setAttribute('aria-hidden', 'true');
 
         // Crear el contenido del modal
@@ -51,7 +51,6 @@ export class FinalizarCompraModal {
             divCampo.classList.add('mb-3');
 
             const label = document.createElement('label');
-            label.setAttribute('for', campo.id);
             label.textContent = campo.label;
             label.classList.add('form-label');
 
@@ -61,7 +60,7 @@ export class FinalizarCompraModal {
                 input.id = campo.id;
                 input.name = campo.id;
                 input.required = campo.required;
-                if (campo.disabled) input.disabled = true; // Deshabilitar el select de cuotas inicialmente
+                if (campo.disabled) input.disabled = true; // deshabilito el select de cuotas inicialmente
                 campo.options.forEach(optionValue => {
                     const option = document.createElement('option');
                     option.value = optionValue;
@@ -82,25 +81,8 @@ export class FinalizarCompraModal {
             formulario.appendChild(divCampo);
         });
 
-        // Agregar el campo de Monto a Pagar
-        const divMonto = document.createElement('div');
-        divMonto.classList.add('mb-3');
-
-        const labelMonto = document.createElement('label');
-        labelMonto.textContent = 'Monto a pagar';
-        labelMonto.classList.add('form-label');
-        divMonto.appendChild(labelMonto);
-
-        const montoPagarInput = document.createElement('input');
-        montoPagarInput.id = 'monto-pagar';
-        montoPagarInput.type = 'text';
-        montoPagarInput.readOnly = true; // No editable por el usuario
-        montoPagarInput.classList.add('form-control');
-        divMonto.appendChild(montoPagarInput);
-
-        formulario.appendChild(divMonto);
-
-        // Botones de acción
+      
+        // botones
         const accionesDiv = document.createElement('div');
         accionesDiv.classList.add('modal-footer');
 
@@ -123,49 +105,19 @@ export class FinalizarCompraModal {
         modalDetalle.appendChild(modalDialog);
         document.body.appendChild(modalDetalle);
 
-        // Agregar evento para procesar el formulario
+        // cierra el formulario, abre el modal de agradecimiento
         formulario.addEventListener('submit', (event) => {
             event.preventDefault();
             this.procesarCompra();
         });
 
-        // Evento para habilitar el select de cuotas solo si se selecciona una tarjeta
+        // habilita el select de cuotas solo si se selecciona una tarjeta
         const tipoTarjetaSelect = document.getElementById('tipo-tarjeta');
         const cuotasSelect = document.getElementById('cuotas');
         tipoTarjetaSelect.addEventListener('change', () => {
-            if (tipoTarjetaSelect.value !== 'Selecciona la tarjeta') {
-                cuotasSelect.disabled = false;
-            } else {
-                cuotasSelect.disabled = true;
-            }
+            cuotasSelect.disabled = tipoTarjetaSelect.value === 'Selecciona la tarjeta';
         });
 
-        // Evento para calcular el monto a pagar según las cuotas
-        cuotasSelect.addEventListener('change', () => {
-            this.calcularMontoPagar();
-        });
-    }
- 
-    calcularMontoPagar() {
-        // no funciona!!! borrar a futuroooo
-        const montoBase = 1000; // sin sentido, no puedo pasar la variable temporal donde almaceno el monto total del carrito...
-        const cuotas = document.getElementById('cuotas').value;
-
-
-        // borrar .......
-        let porcentajeExtra = 0;
-        if (cuotas === '3 cuotas') {
-            porcentajeExtra = 0.05; // 5%
-        } else if (cuotas === '6 cuotas') {
-            porcentajeExtra = 0.10; // 10%
-        } else if (cuotas === '12 cuotas') {
-            porcentajeExtra = 0.25; // 25%
-        }
-
-        // Calcular el monto total  / borrar tmbn
-        const montoFinal = montoBase + (montoBase * porcentajeExtra);
-        const montoPagarInput = document.getElementById('monto-pagar');
-        montoPagarInput.value = `$${montoFinal.toFixed(2)}`; // Mostrar el monto con 2 decimales
     }
 
     crearModalAgradecimiento() {
@@ -224,7 +176,7 @@ export class FinalizarCompraModal {
     cerrarModal() {
         const modalDetalle = document.getElementById('modal-detalle');
         if (modalDetalle) {
-            const bootstrapModal = bootstrap.Modal.getInstance(modalDetalle);
+            const bootstrapModal = bootstrap.Modal.getInstance(modalDetalle); // utilizo funciones de bootstrap
             bootstrapModal.hide();
         }
     }
@@ -238,36 +190,13 @@ export class FinalizarCompraModal {
     }
 
     procesarCompra() {
-        const nombre = document.getElementById('nombre-completo');
-        const email = document.getElementById('email');
-        const telefono = document.getElementById('telefono');
-        const direccion = document.getElementById('direccion');
-        const fecha = document.getElementById('fecha-entrega');
-        const tipoTarjeta = document.getElementById('tipo-tarjeta');
-        const numeroTarjeta = document.getElementById('numero-tarjeta');
-        const codigoSeguridad = document.getElementById('codigo-seguridad');
-        const cuotas = document.getElementById('cuotas');
-    
-        const campos = [nombre, email, telefono, direccion, fecha, tipoTarjeta, numeroTarjeta, codigoSeguridad, cuotas];
         let validado = true;
-    
-        campos.forEach(campo => {
-            // Si el campo está vacío, agregar el borde rojo
-            if (!campo.value || (campo.type === 'select' && campo.selectedIndex === 0)) {
-                campo.classList.add('is-invalid'); // Agregar clase 'is-invalid' para el borde rojo
-                validado = false;
-            } else {
-                campo.classList.remove('is-invalid'); // Remover borde rojo si el campo está completo
-            }
-        });
-    
         if (validado) {
             this.cerrarModal();
             this.abrirModalAgradecimiento();
         }
     }
     
-
     abrirModalAgradecimiento() {
         const modalAgradecimiento = document.getElementById('modal-agradecimiento');
         if (modalAgradecimiento) {

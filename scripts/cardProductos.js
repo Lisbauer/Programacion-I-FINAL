@@ -47,11 +47,11 @@ class Producto {
 
         const price = document.createElement("span");
         price.classList.add("card-precio");
+
         const precioTexto = document.createElement("strong");
         precioTexto.textContent = `Precio: $${this.precio.toLocaleString()}`;
         price.appendChild(precioTexto);
 
-        // Agregamos el peso, material y dimensiones
         const peso = document.createElement("p");
         peso.classList.add("card-text");
         peso.textContent = `Peso: ${this.peso || 'No disponible'}`;
@@ -123,9 +123,11 @@ export function renderizarProductos(productos) {
         return;
     }
 
-    contenedor.innerHTML = '';  // Limpiamos el contenedor
+    contenedor.innerHTML = '';  // limpiamos el contenedor en caso de q tengamos algo dentro, pero podria eliminarse esta linea de codigo
 
+    // itero sobre el array, cada iteracion del ciclo toma un elemento de productos y lo asigno a mi variable temporal de productodata 
     productos.forEach(productoData => {
+        // creo una nueva instancia de Producto segun mi clase, y estoy definidiendo el tipo de producto a crear aca
         const producto = new Producto(
             productoData.id,
             productoData.nombre,
@@ -138,6 +140,7 @@ export function renderizarProductos(productos) {
             productoData.dimensiones 
         );
 
+        // basicamente, mi div con ID productos (contenedor), permite incorporar a la nueva constante producto con el foreach realizado accediendo a las propiedades del metood renderizar, que es donde se unen las propiedades y los objetos con this.etc
         contenedor.appendChild(producto.renderizar());
     });
 }  

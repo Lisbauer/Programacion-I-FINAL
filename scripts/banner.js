@@ -15,11 +15,9 @@ export function mostrarBanner(categoria) {
     const banner = document.createElement("div");
     banner.classList.add("banner-flotante");
 
-
     const img = document.createElement("img");
-    img.src = banners[categoria] || "./images/default-banner.jpg";  // Banner por defecto
+    img.src = banners[categoria];
     img.alt = "Banner publicitario";
-
 
     const botonVerMas = document.createElement("a");
     botonVerMas.textContent = "Ver Más";
@@ -28,9 +26,8 @@ export function mostrarBanner(categoria) {
    
     // cruz de cierre de banner
     const botonCerrar = document.createElement("div");
-    botonCerrar.textContent = "×"; 
+    botonCerrar.textContent = "x"; 
     botonCerrar.classList.add("btn-close-banner");
-
 
     // si el usuario desea cerrar el banner... 
     botonCerrar.addEventListener("click", () => {
@@ -38,7 +35,6 @@ export function mostrarBanner(categoria) {
         bannerVisible = false; // se reinicia el estado del banner
     });
 
-    
     banner.appendChild(img);
     banner.appendChild(botonVerMas);
     banner.appendChild(botonCerrar);
@@ -51,5 +47,6 @@ export function mostrarBanner(categoria) {
         bannerVisible = false; // se reinicia el estado del banner
     }, 10000);
 
+    // te hago visible luego de crearte en el DOM
     bannerVisible = true;
 }

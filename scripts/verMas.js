@@ -6,7 +6,7 @@ export function crearModalVerMas(producto) {
   const modal = document.createElement("div");
   modal.classList.add("modal", "fade");
   modal.id = "modalProducto";
-  modal.setAttribute("tabindex", "-1");
+  modal.setAttribute("tabindex", "-1"); 
   modal.setAttribute("aria-labelledby", "modalProductoLabel");
   modal.setAttribute("aria-hidden", "true");
 
@@ -136,7 +136,7 @@ export function crearModalVerMas(producto) {
     detectarTeclaCerrar(event, () => bootstrapModal.hide())
   );
 
-  // se limpia el listener del keydown al cerrar el modal sino sigue funcionando
+  // se limpia el listener del keydown al cerrar el modal sino sigue funcionando y el navegadr  sigue procesandolo
   modal.addEventListener("hidden.bs.modal", () => {
     modal.remove();
     document.removeEventListener("keydown", detectarTeclaCerrar);

@@ -7,15 +7,20 @@ export class Carrito {
     this.productosEnCarrito =
       JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
     this.actualizarContadorCarrito(); // actualiza el contador cuando se cargue el carrito
+
+    const carritoIcono = document.getElementById('carrito-contenedor');
+    carritoIcono.addEventListener('click', () => {
+        this.abrirModalCarrito();
+    });
   }
 
   agregarProducto(producto) {
-    // verifico si el producto ya esta en el carrito
+    // verifico si el producto ya esta en el carrito para no repetirlo
     const productoExistente = this.productosEnCarrito.find(
       (p) => p.id === producto.id
     );
     if (productoExistente) {
-      productoExistente.cantidad += 1; // si ya esta, sumo una unidad
+      productoExistente.cantidad += 1; // si ya esta, sumo de uno en uno
     } else {
       // Si no esta, lo agregamos al carrito para que no se repitan los items.
       this.productosEnCarrito.push({ ...producto, cantidad: 1 });
@@ -23,6 +28,8 @@ export class Carrito {
     this.actualizarModalCarrito(); // actualizo el carrito
     this.actualizarContadorCarrito(); // actualizo el contador del carrito
     this.guardarEnLocalStorage(); // Guardar los productos en el localStorage
+
+    
   }
 
   abrirModalCarrito() {
@@ -35,14 +42,14 @@ export class Carrito {
       modalCarrito.style.display = "none"; // se cierra el modal
     };
 
-    //funcion global para detectar teclas
+    //llamo a la funcion global para detectar teclas
     document.addEventListener("keydown", (event) =>
       detectarTeclaCerrar(event, cerrarModal)
     );
-
-    modalCarrito.addEventListener("hidden.bs.modal", () => {
+    // hidden es un evento de bootstrap q dispara cuando el modal cierra y sirve para posibles limpiezas
+    modalCarrito.addEventListener("hidden.bs.modal",() => {
       modalCarrito.remove();
-      document.removeEventListener("keydown", detectarTeclaCerrar); // remover el listener
+      document.removeEventListener("keydown", detectarTeclaCerrar); // remuevo el evento para q el naveghador no siga procesandolo, no hay otro motivo
     });
   }
 
@@ -65,7 +72,7 @@ export class Carrito {
       return;
     }
 
-    // variable para calcular el total
+    // variable para calcular el total, iniciamos en 0
     let totalCarrito = 0;
 
     // HTML para cada producto
@@ -179,17 +186,7 @@ export class Carrito {
     modalCarrito.style.display = "none";
   }
 
-  abrirModalDetalle() {
-    const modalDetalle = document.getElementById("modal-detalle");
-    const modalDetalleContenido = document.getElementById(
-      "modal-detalle-contenido"
-    );
-
-    modalDetalleContenido.innerHTML =
-      "<p>Formulario para finalizar compra (en desarrollo).</p>";
-    modalDetalle.style.display = "block";
-  }
-
+  // funcion que se ebcarga del manejo de sumar y restar dentro del modal de carrito
   cambiarCantidadProducto(idProducto, accion) {
     const producto = this.productosEnCarrito.find((p) => p.id === idProducto);
     if (producto) {
@@ -221,7 +218,7 @@ export class Carrito {
         (total, producto) => total + producto.cantidad,
         0
       );
-      // Si no hay productos, muestra 0 en lugar de desaparecer el contador
+      // utilizo el operador ternario,si no hay productos, muestra 0 en lugar de desaparecer el contador
       contador.textContent = totalProductos > 0 ? totalProductos : "0";
 
       // Guardar el contador en el localStorage
@@ -230,12 +227,12 @@ export class Carrito {
   }
 
   guardarEnLocalStorage() {
-    //  productos y el contador en el localStorage
     localStorage.setItem(
       "productosEnCarrito",
       JSON.stringify(this.productosEnCarrito)
     );
   }
+
 }
 
 // instancia del carrito

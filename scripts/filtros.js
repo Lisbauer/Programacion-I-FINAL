@@ -1,7 +1,7 @@
 import { renderizarProductos } from "./cardProductos.js";
 import { mostrarBanner } from "./banner.js";
 
-// variable global donde almaceno los productos
+// esto es un array, dentro de una variable global donde almaceno los productos
 let productosGlobales = [];
 
 // variables globales para almacenar el estado de los filtros
@@ -21,14 +21,13 @@ export function crearDropdownCategoria() {
     const opciones = ["Todo", "Aros", "Collares", "Anillos"];
     opciones.forEach(opcion => {
         const option = document.createElement("option");
-        option.value = opcion.toLowerCase();
         option.textContent = opcion;
         categoriaDropdown.appendChild(option);
     });
 
-    // Evento para filtrar por categoria
+    // evento para filtrar por categoria con el metodo change, q se activa cuando el valor de un select o inputetc, cambia
     categoriaDropdown.addEventListener("change", (e) => {
-        filtroCategoria = e.target.value.toLowerCase();
+        filtroCategoria = e.target.value.toLowerCase(); 
         filtrarProductos(true);  //  true para indicar que el cambio fue de categoria
     });
 
@@ -62,19 +61,16 @@ export function crearDropdownPrecio() {
     contenedor.appendChild(precioDropdown);
 }
 
-// Función para filtrar productos
-export function filtrarProductos(cambioDeCategoria) {
-    if (productosGlobales.length === 0) {
-        return;  // si no hay productos no hace nada
-    }
+// Función para filtrar productos, el paraemtro es un indicador de si hubo un camnbio en la categoria de prod
+function filtrarProductos(cambioDeCategoria) {
 
-    let productosFiltrados = [...productosGlobales];  // lo copio para evitar modificar el original
+    let productosFiltrados = [...productosGlobales];  // uso el operador spread ... lo copio para evitar modificar el original y no afectar  a productosglobales directamente
 
     // filtro por categoria solo si es diferente de "todo"
     if (filtroCategoria !== "todo") {
         productosFiltrados = productosFiltrados.filter(producto =>
             producto.categoria && producto.categoria.toLowerCase() === filtroCategoria
-        );
+        ); // si ambas condiciones son verdaderas, se almacenara en mi variable global
     }
 
     // Filtro solo productos con precio válido
@@ -87,7 +83,7 @@ export function filtrarProductos(cambioDeCategoria) {
         productosFiltrados.sort((a, b) => b.precio - a.precio);  // Mayor a menor
     }
 
-    // si cambio categoria y no es "todo", se ve el banner
+    // se renderiza el banner si ambas son true, y como filtro adicional, evitamos la opcion de Todo
     if (cambioDeCategoria && filtroCategoria !== "todo") {
         mostrarBanner(filtroCategoria);
     }
@@ -100,5 +96,5 @@ export function filtrarProductos(cambioDeCategoria) {
 
 // Función para almacenar los productos cargados
 export function setProductos(productos) {
-    productosGlobales = productos;  // Almacenar los productos
+    productosGlobales = productos;  // almacenar los productos
 }
